@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/bootstrap-4.1.1/css/bootstrap.min.css}" />
+<title>Att</title>
+</head>
+<body>
+	<p><span th:text="${attSlot.classId}">Class id</span>
+	  - <span th:text="${attSlot.subjectCode}">Subject</span>
+	  - Slot Id <span th:text="${attSlot.slotId}">slotId</span>
+	</p>
+  <!-- <form th:action="@{/attend}" method="post" th:object="${attDetail}"> -->
+  <form>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Rollnumber</th>
+          <th scope="col">Name</th>
+          <th scope="col">Present</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="student: ${listStu}">
+          <td th:text="${student.key.studentId}"></td>
+          <td th:text="${student.key.studentName}"></td>
+          <td th:if="${student.value != null}">
+            <input th:if="${student.value.status == true}" type="checkbox" checked="checked">
+            <input th:if="${student.value.status == false}" type="checkbox" >
+          </td>
+          <td th:if="${student.value == null}">
+            <input type="checkbox">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <input type="text" th:field="*{idTimeSlot}" th:value="${attSlot.slotId}" hidden>
+<input type="text" th:field="*{studentId}" th:value="${student.key.studentId}" hidden> -->
+    <input type="submit" th:value="Submit" class="btn btn-primary">
+	<input type="button" th:value="Reset" class="btn">
+  </form>
+</body>
+</html>
